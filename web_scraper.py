@@ -8,7 +8,7 @@ menu = 0
 
 unique_websites = []
 def generate_sites():
-    user_keyword = 
+    user_keyword = keyword.get()
     find_websites_from_keyword(unique_websites, user_keyword)
 
 def call_filter():
@@ -16,6 +16,9 @@ def call_filter():
     filter_by_domain(user_site, unique_websites)
 
 def call_search():
+    menu = 1
+    num_to_display = user_amount.get()
+    to_display_list = unique_websites[:num_to_display]
 
 root = Tk()
 mainframe = Frame(root)
@@ -38,6 +41,10 @@ site_question = Label(mainframe, text="Which site would you want to look at?")
 site = StringVar()
 site_entry = Entry(mainframe, textvariable=site)
 
+keyword = StringVar()
+keyword_label = Label(mainframe, text="What error do you have?", font=pixel_font_small) 
+keyword_entry = Entry(mainframe, textvariable=keyword) 
+
 generate_list_button = Button(mainframe, text="Generate Sites", command = generate_sites)
 
 #Gridding the widgets
@@ -47,10 +54,15 @@ mainframe.grid(padx = 50, pady = 50)
 if menu == 0:
     titleLabel.grid(row=1, column=1, columnspan=2)
     creatorsLabel.grid(row=2, column=1, columnspan=2)
-
-if menu == 1:
-user_choice.grid(row=3, column=1, columnspan=2)
-site_numbers.grid(row=4, column=1, columnspan=2)
-v.grid(row=1, column=1, rowspan = 3)
+    start_search.grid(row=3, column=1, columnspan=2)
+elif menu == 1:
+    titleLabel.destroy()
+    creatorsLabel.destroy()
+    start_search.destroy()
+    user_choice.grid(row=3, column=1, columnspan=2)
+    site_numbers.grid(row=4, column=1, columnspan=2)
+    
+    
+# v.grid(row=1, column=1, rowspan = 3)
 
 root.mainloop()
