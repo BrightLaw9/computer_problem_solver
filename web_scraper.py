@@ -6,15 +6,16 @@ from bs4 import BeautifulSoup
 
 
 global value, unique_websites, first_time
-value = 1
+value = 0
 first_time = True
 
 def go_back():
     global value
     value -= 1
-    if value == 2:
+    if value == 1:
         call_search()
-    elif value == 1:
+    elif value == 0:
+        print('hello')
         title_menu()
 
 def destroy_menu1():
@@ -35,10 +36,12 @@ def destroy_menu3():
     site_label.destroy()
 
 def title_menu():
-    global first_time
+    global first_time, value
     if first_time == False:
         destroy_menu2()
     first_time = False
+
+    value = 1
     titleLabel.grid(row=1, sticky=NSEW, padx=275)
     creatorsLabel.grid(row=2, sticky=NSEW, padx=275)
     start_search.grid(row=3, sticky=NSEW, padx=275, pady=25)
@@ -53,7 +56,7 @@ def convert_website_list_to_string(final_websites):
 def generate_sites():
     global unique_websites, value
     final_websites = call_filter()
-
+    value += 1
 
     #To string for label display
     final_website_string = convert_website_list_to_string(final_websites)
@@ -89,7 +92,8 @@ def call_search():
         destroy_menu1()
     else:
         destroy_menu3()
-
+    
+    value += 1
 
     keyword_label.grid(row=1, column=1, sticky=NSEW, padx=225, columnspan=2)
     keyword_entry.grid(row=2, column=1, sticky=NSEW, padx=225, columnspan=2)
